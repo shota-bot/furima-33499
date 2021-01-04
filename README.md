@@ -15,7 +15,6 @@
 | birthday           | date   | null: false |
 
 ## Association
-- has_many :addresses
 - has_many :items
 - has_many :accounts
 - has_many :comments
@@ -32,7 +31,7 @@
 | city           | string     | null: false                    |
 | building       | string     |                                |
 | phone_num      | string     | null: false                    |
-| user           | references | null: false, foreign_key: true |
+| account        | references | null: false, foreign_key: true |
 
 ## Association
 - belongs_to :account
@@ -41,7 +40,7 @@
 ## items テーブル
 | Column         | Type       | Option                         |
 | -------------- | ---------- | ------------------------------ |
-| item_name      | string     | null: false                    |
+| name           | string     | null: false                    |
 | text           | text       | null: false                    |
 | postage_id     | integer    | null: false                    |
 | prefectures_id | integer    | null: false                    |
