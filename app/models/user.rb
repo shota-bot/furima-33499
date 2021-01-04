@@ -12,8 +12,14 @@ class User < ApplicationRecord
     validates :nickname
     validates :birthday
     validates :password, format: { with: PASSWORD_REGEX, message: "は英字と数字の両方を含めて設定してください" }
-    validates :last_name, :first_name, format: { with: NAME_REGEX, message: "は全角（漢字・ひらがな・カタカナ）で入力してください" }
-    validates :last_name_kana, :first_name_kana, format: { with: NAME_KANA_REGEX, message: "は全角カタカナで入力してください" }
+    with_options format: { with: NAME_REGEX, message: "は全角（漢字・ひらがな・カタカナ）で入力してください" } do
+      validates :last_name
+      validates :first_name
+    end
+    with_options format: { with: NAME_KANA_REGEX, message: "は全角カタカナで入力してください" } do
+      validates :last_name_kana
+      validates :first_name_kana
+    end
   end 
 
 end
