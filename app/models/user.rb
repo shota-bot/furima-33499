@@ -12,8 +12,7 @@ class User < ApplicationRecord
                           with: PASSWORD_REGEX, 
                           message: "は英字と数字の両方を含めて設定してください"
                         } 
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+
 
   NAME_REGEX = /\A[ぁ-んァ-ヶ一-龥々]/.freeze
   validates :last_name, presence: true,
