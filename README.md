@@ -1,22 +1,21 @@
 # README
 # テーブル設計
 
-
+<!-- ユーザー管理 -->
 ## users テーブル
-| Column          | Type   | Option      |
-| ----------------| -------| ----------- |
-| nickname        | string | null: false |
-| email           | string | null: false |
-| password        | string | null: false |
-| last_name       | string | null: false |
-| first_name      | string | null: false |
-| last_name_kana  | string | null: false |
-| first_name_kana | string | null: false |
-| birthday        | string | null: false |
+| Column             | Type   | Option      |
+| -------------------| -------| ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
+| birthday           | date   | null: false |
 
 ## Association
 - has_many :addresses
-- has_many :cards
 - has_many :items
 - has_many :accounts
 - has_many :comments
@@ -24,90 +23,56 @@
 - has_many :reports
 
 
+<!-- 住所 -->
 ## addresses テーブル
-| Column      | Type       | Option                         |
-| ----------- | ---------- | ------------------------------ |
-| postal_code | integer    | null: false                    |
-| prefectures | string     | null: false                    |
-| city        | string     | null: false                    |
-| building    | string     |                                |
-| phone_num   | integer    | null: false                    |
-| user        | references | null: false, foreign_key: true |
+| Column         | Type       | Option                         |
+| -------------- | ---------- | ------------------------------ |
+| postal_code    | string     | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| city           | string     | null: false                    |
+| building       | string     |                                |
+| phone_num      | string     | null: false                    |
+| user           | references | null: false, foreign_key: true |
 
 ## Association
 - belongs_to :user
-- has_many :accounts
 
 
- ## cards テーブル
-| Column | Type       | Option                         |
-| ------ | ---------- | ------------------------------ |
-| num    | integer    | null: false                    |
-| limit  | integer    | null: false                    |
-| code   | integer    | null: false                    |
-| user   | references | null: false, foreign_key: true |
-
-## Association
-- belongs_to :user
-- has_many : accounts
-
-
+<!-- 出品管理 -->
 ## items テーブル
-| Column    | Type       | Option                         |
-| --------- | ---------- | ------------------------------ |
-| item_name | string     | null: false                    |
-| text      | text       | null: false                    |
-| postage   | string     | null: false                    |
-| source    | string     | null: false                    |
-| days      | string     | null: false                    |
-| price     | integer    | null: false                    |
-| user      | references | null: false, foreign_key: true |
-| category  | references | null: false, foreign_key: true |
-| status    | references | null: false, foreign_key: true |
+| Column         | Type       | Option                         |
+| -------------- | ---------- | ------------------------------ |
+| item_name      | string     | null: false                    |
+| text           | text       | null: false                    |
+| postage_id     | integer    | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| day_id         | integer    | null: false                    |
+| price          | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| category_id    | integer    | null: false                    |
+| status_id      | integer    | null: false                    |
 
 ## Association
 - belongs_to :user
-- belongs_to :category
-- belongs_to :status
 - has_many :comments
 - has_many :likes
 - has_many :reports
 - has_one :account
 
 
-## categories テーブル
-| Column   | Type   | Option      |
-| ------   | ------ | ----------- |
-| category | string | null: false |
-
-## Association
-- has_many :items
-
-
-## statuses テーブル
-| Column | Type   | Option      |
-| ------ | ------ | ----------- |
-| status | string | null: false |
-
-## Association
-- has_many :items
-
-
+<!-- 購入管理 -->
 ## accounts テーブル
 | Column  | Type       | Option                         |
 | ------- | ---------- | ------------------------------ |
 | user    | references | null: false, foreign_key: true |
 | item    | references | null: false, foreign_key: true |
-| card    | references | null: false, foreign_key: true |
-| address | references | null: false, foreign_key: true |
 
 ## Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :card
-- belongs_to :address
 
 
+<!-- コメント -->
 ## comments テーブル
 | Column | Type       | Option                         |
 | ------ | ---------- | ------------------------------ |
@@ -120,6 +85,7 @@
 - belongs_to :item
 
 
+<!-- いいね -->
 ## likes テーブル
 | Column | Type       | Option                         |
 | ------ | ---------- | ------------------------------ |
@@ -131,6 +97,7 @@
 - belongs_to :item
 
 
+<!-- 通報 -->
 ## reports テーブル
 | Column | Type       | Option                         |
 | ------ | ---------- | ------------------------------ |
