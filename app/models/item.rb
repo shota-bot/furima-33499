@@ -8,6 +8,17 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :day
 
- validates :name, :text, :price, :image, presence: true
- validates :category_id, :status_id, :postage_id, :prefectures_id, :day_id, numericality: { other_then: 1 }
+  with_options presence: true do
+    validates :name
+    validates :text
+    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "300円〜9999999円以内で入力して下さい" }
+    validates :image
+    with_options numericality: { greater_than_or_equal_to: 2, message: "を選択した下さい" } do
+      validates :category_id
+      validates :status_id
+      validates :postage_id
+      validates :prefectures_id
+      validates :day_id
+    end
+  end
 end
