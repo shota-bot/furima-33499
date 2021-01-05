@@ -5,7 +5,7 @@ FactoryBot.define do
     Faker::Config.locale = :ja
     name    { Faker::Lorem.word }
     text    { Faker::Lorem.sentence }
-    price   { Faker::Number.between(from: 300, to: 9999999)}
+    price   { Faker::Number.between(from: 300, to: 9_999_999) }
     association :user
     association :category
     association :status
