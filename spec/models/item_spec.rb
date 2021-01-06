@@ -13,13 +13,13 @@ RSpec.describe Item, type: :model do
     end
 
     context '商品出品できない時' do
-      it "nameが空だと登録できない" do
-        @item.name = ""
+      it 'nameが空だと登録できない' do
+        @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
-      it "textが空だと登録できない" do
-        @item.text = ""
+      it 'textが空だと登録できない' do
+        @item.text = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
@@ -83,8 +83,8 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Day を選択して下さい')
       end
-      it "pirceがないと登録できない" do
-        @item.price = ""
+      it 'pirceがないと登録できない' do
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include('Price 300円〜9999999円以内で入力して下さい')
       end
