@@ -27,7 +27,7 @@
 | Column         | Type       | Option                         |
 | -------------- | ---------- | ------------------------------ |
 | postal_code    | string     | null: false                    |
-| prefectures_id | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
 | city           | string     | null: false                    |
 | house_num      | string     | null: false                    |
 | building       | string     |                                |
