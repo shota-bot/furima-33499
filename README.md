@@ -32,10 +32,10 @@
 | house_num      | string     | null: false                    |
 | building       | string     |                                |
 | phone_num      | string     | null: false                    |
-| account        | references | null: false, foreign_key: true |
+| order          | references | null: false, foreign_key: true |
 
 ## Association
-- belongs_to :account
+- belongs_to :order
 
 <!-- 出品管理 -->
 ## items テーブル
