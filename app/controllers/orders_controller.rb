@@ -3,6 +3,9 @@ class OrdersController < ApplicationController
   before_action :move_root_path
 
   def index
+    if @item.order
+      redirect_to root_path
+    end
     @user_order = UserOrder.new
   end
 
