@@ -16,7 +16,7 @@
 
 ## Association
 - has_many :items
-- has_many :accounts
+- has_many :orders
 - has_many :comments
 - has_many :likes
 - has_many :reports
@@ -27,14 +27,15 @@
 | Column         | Type       | Option                         |
 | -------------- | ---------- | ------------------------------ |
 | postal_code    | string     | null: false                    |
-| prefectures_id | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
 | city           | string     | null: false                    |
+| house_num      | string     | null: false                    |
 | building       | string     |                                |
 | phone_num      | string     | null: false                    |
-| account        | references | null: false, foreign_key: true |
+| order          | references | null: false, foreign_key: true |
 
 ## Association
-- belongs_to :account
+- belongs_to :order
 
 <!-- 出品管理 -->
 ## items テーブル
@@ -55,11 +56,11 @@
 - has_many :comments
 - has_many :likes
 - has_many :reports
-- has_one :account
+- has_one :order
 
 
 <!-- 購入管理 -->
-## accounts テーブル
+## orders テーブル
 | Column  | Type       | Option                         |
 | ------- | ---------- | ------------------------------ |
 | user    | references | null: false, foreign_key: true |
