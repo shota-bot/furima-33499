@@ -228,7 +228,7 @@
   font-size: 13px;
 }
 
-img {
+.item-image {
   height :100px;
   width :100px;
   object-fit: contain;
