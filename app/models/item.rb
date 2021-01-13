@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_one_attached :image
+  has_many_attached :images
   has_one :order
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -15,7 +15,7 @@ class Item < ApplicationRecord
     validates :price,
               numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                               message: '300円〜9999999円以内で入力して下さい' }
-    validates :image
+    # validates :image
     with_options numericality: { other_than: 1, message: 'を選択して下さい' } do
       validates :category_id
       validates :status_id
