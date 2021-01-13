@@ -10,7 +10,7 @@
       <div class="previews">
         <div class="slider">
           <% @item.images.each do |image| %>
-            <%= image_tag image, class: "item-box-img" %>
+            <%= image_tag image, class: "item-box-img", width: "100px", height: "100px" %>
           <% end %>
         </div>
       </div>
