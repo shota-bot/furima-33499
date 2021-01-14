@@ -1,6 +1,6 @@
 class UserOrder
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_num, :building, :phone_num, :token
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_num, :building, :phone_num, :customer_token
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'ハイフン(-)を入れてください' }
@@ -8,7 +8,7 @@ class UserOrder
     validates :city
     validates :house_num
     validates :phone_num, format: { with: /\A\d{,11}\z/}
-    validates :token
+    validates :customer_token
     validates :user_id
     validates :item_id
   end
