@@ -69,8 +69,9 @@ gem 'pry-rails'
 gem 'payjp'
 gem "aws-sdk-s3", require: false
 gem 'jquery-rails'
-gem 'rails-i18n'
 
 group :production do
   gem 'unicorn', '5.4.1'
 end
+
+gem 'rails-i18n'

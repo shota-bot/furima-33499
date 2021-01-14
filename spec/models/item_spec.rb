@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品' do
     context '商品を出品できる時' do
-      it 'image,name,text,priceが存在すれば登録できる' do
+      it 'images,name,text,priceが存在すれば登録できる' do
         expect(@item).to be_valid
       end
     end
@@ -23,10 +23,10 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
-      it 'imageに紐づいていないと登録できない' do
-        @item.image = nil
+      it 'imagesに紐づいていないと登録できない' do
+        @item.images = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include("Images can't be blank")
       end
       it 'userに紐づいていないと登録できない' do
         @item.user = nil
@@ -86,22 +86,22 @@ RSpec.describe Item, type: :model do
       it 'pirceがないと登録できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price 300円〜9999999円以内で入力して下さい')
+        expect(@item.errors.full_messages).to include('Price を300円〜9999999円以内で入力して下さい')
       end
       it 'priceが半角数字でないと登録できない' do
         @item.price = '５００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price 300円〜9999999円以内で入力して下さい')
+        expect(@item.errors.full_messages).to include('Price を300円〜9999999円以内で入力して下さい')
       end
       it 'priceが300より少ないと登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price 300円〜9999999円以内で入力して下さい')
+        expect(@item.errors.full_messages).to include('Price を300円〜9999999円以内で入力して下さい')
       end
       it 'priceが10000000以上だと登録できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price 300円〜9999999円以内で入力して下さい')
+        expect(@item.errors.full_messages).to include('Price を300円〜9999999円以内で入力して下さい')
       end
     end
   end
