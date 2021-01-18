@@ -13,6 +13,7 @@ require("../card");
 require("./preview");
 require('jquery');
 require('../slick');
+require('./tag');
 
 
 
