@@ -1,4 +1,4 @@
-if (document.URL.match( /new/ ) || document.URL.match( /edit/ )){
+if (location.pathname.match("items/new") || location.pathname.match("items/edit")){
   document.addEventListener('DOMContentLoaded', function(){
     const ImageList = document.getElementById('image-list');
 
@@ -14,7 +14,7 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )){
 
       const inputHTML = document.createElement('input');
       inputHTML.setAttribute('id', 'item_image_${itemElementNum}');
-      inputHTML.setAttribute('name', 'item[images][]');
+      inputHTML.setAttribute('name', 'items_tag[images][]');
       inputHTML.setAttribute('type', 'file');
 
 
