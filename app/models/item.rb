@@ -10,6 +10,4 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :prefecture
   belongs_to :day
-
-  
 end
