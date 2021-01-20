@@ -5,36 +5,31 @@
     <h1>
       詳細検索
     </h1>
-    <%= search_form_for @p, url: search_items_path do |f| %>
+    <%= search_form_for @q, url: search_items_path do |f| %>
     
       <div class="category-search">
         <%= f.label :category_id_eq, 'カテゴリー' %>
         <%= f.collection_select :category_id_eq, Category.where.not(id: 1), :id, :name, include_blank: '指定なし' %>
       </div>
 
+      <div class="tag-search">
+        <%= f.label :tags_tagname_cont, 'ブランド' %>
+        <%= f.search_field :tags_tagname_cont, placeholder: '例）シャネル' %>
+      </div>
+
       <div class="status-search">
-        <%= f.label :status_id_eq, '状態' %>
-        <%= f.radio_button :status_id_eq, '' %>
-        指定なし
-        <% Status.where.not(id: 1).each do |status| %>
-          <%= f.radio_button :status_id_eq, status.id %>
-          <%= status.name %>
-        <% end %>
+        <%= f.label :status_id_in, '状態' %>
+        <%= f.collection_check_boxes :status_id_in, Status.where.not(id: 1), :id, :name %>
       </div>
       
       <div class="postage-search">
-        <%= f.label :postage_id_eq, '配送料' %>
-        <%= f.radio_button :postage_id_eq, '' %>
-        指定なし
-        <% Postage.where.not(id: 1).each do |postage| %>
-          <%= f.radio_button :postage_id_eq, postage.id %>
-          <%= postage.name %>
-        <% end %>
+        <%= f.label :postage_id_in, '配送料' %>
+        <%= f.collection_check_boxes :postage_id_in, Postage.where.not(id: 1), :id, :name %>
       </div>
 
       <div class="price-search">
         <%= f.label :price_lteq, '価格' %>
-        <%= f.radio_button :price_lteq, '' %>
+        <%= f.radio_button :price_lteq, '', { checked: true }  %>
         指定なし
         <%= f.radio_button :price_lteq, '1000' %>
         〜1000円
@@ -61,26 +56,26 @@
 
 
   <div class="item-area">
-    <% if @results.length != 0 %>
+    <% if @items.length != 0 %>
       <ul class='item-lists'>
-        <% @results.each do |result| %>
+        <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to item_path(result.id) do %>
+            <%= link_to item_path(item.id) do %>
               <div class='item-img-content'>
-                <% result.images.first(1).each do |image| %>
+                <% item.images.first(1).each do |image| %>
                 <%= image_tag image, class: "item-img" %>
                 <% end %>
-                <% if result.order %>
+                <% if item.order %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
                 <% end %>
                 <div class='item-info'>
                     <h3 class='item-name'>
-                      <%= result.name %>
+                      <%= item.name %>
                     </h3>
                     <div class='item-price'>
-                      <span><%= result.price %>円<br><%= result.postage.name %></span>
+                      <span><%= item.price %>円<br><%= item.postage.name %></span>
                       <div class='star-btn'>
                         <%= image_tag "star.png", class:"star-icon" %>
                         <span class='star-count'>0</span>

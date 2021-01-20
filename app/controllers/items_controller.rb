@@ -5,12 +5,12 @@ class ItemsController < ApplicationController
   before_action :search_item, only: [:index, :search, :show]
   
   def index
-    @items = Item.includes(:user).order('created_at DESC')
+    @items = @q.result.includes(:order)
   end
   
   def search
-    @results = @p.result.includes(:tags)
-    @items = Item.all
+    @items = @q.result.includes(:order)
+    @tags = Tag.all
     set_item_column
     set_tag_column
   end
