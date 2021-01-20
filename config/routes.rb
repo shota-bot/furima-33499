@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :create]
     collection do
       get 'tag'
+      get 'search'
     end
   end
 

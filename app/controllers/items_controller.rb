@@ -2,8 +2,17 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :ordered_item, only: [:edit, :destroy]
+  before_action :search_item, only: [:index, :search, :show]
+  
   def index
     @items = Item.includes(:user).order('created_at DESC')
+  end
+  
+  def search
+    @results = @p.result.includes(:tags)
+    @items = Item.all
+    set_item_column
+    set_tag_column
   end
 
   def new
@@ -60,4 +69,14 @@ class ItemsController < ApplicationController
   def ordered_item
     redirect_to root_path if @item.order
   end
+
+  def set_item_column
+    @item_text = Item.select("text").distinct
+  end
+
+  def set_tag_column
+    @tags = Tag.all
+  end
+
+
 end

@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :move_root_path
   before_action :credit_card_present
+  before_action :search_item, only: [:index]
 
   def index
     redirect_to root_path if @item.order
