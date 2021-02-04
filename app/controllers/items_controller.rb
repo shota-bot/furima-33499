@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   before_action :search_item, only: [:index, :search, :show]
   
   def index
-    @items = @q.result.includes(:order)
+    @items = @q.result.includes(:order).order(created_at: :DESC)
   end
   
   def search
