@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   before_action :search_item, only: [:index]
 
   def index
+    @address = current_user.address
     redirect_to root_path if @item.order
     @user_order = UserOrder.new
   end
