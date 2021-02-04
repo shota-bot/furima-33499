@@ -10,10 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.new(sign_up_params)
-    unless @user.valid?
-      render :new and return
-    end
-
+      unless @user.valid?
+        render :new and return
+      end
     session["devise.regist_data"] = {user: @user.attributes}
     session["devise.regist_data"][:user]["password"] = params[:user][:password]
     @address = @user.build_address
@@ -22,9 +21,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create_address
     @address = Address.new(address_params)
-    unless @address.valid?
-      render :new_address and return
-    end
+      unless @address.valid?
+        render :new_address and return
+      end
     session["address_data"] = {address: @address.attributes}
     @card = Card.new
     render :new_card
@@ -34,29 +33,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create_card
     @user = User.new(session["devise.regist_data"]["user"])
     @address = Address.new(session["address_data"]["address"])
-
     @user.build_address(@address.attributes)
     @user.save
-
     session["devise.regist_data"]["user"].clear
     session["address_data"]["address"].clear
-    
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     customer = Payjp::Customer.create(
       description: 'test',
       card: params[:card_token]
     )
-    
     card = Card.new(
       card_token: params[:card_token],
       customer_token: customer.id,
       user_id: @user.id
     )
-    
-    unless card.save
-      render :new_card and return
-    end
-
+      unless card.save
+        render :new_card and return
+      end
     sign_in(:user, @user)
     redirect_to root_path
   end
