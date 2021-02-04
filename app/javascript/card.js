@@ -1,5 +1,4 @@
 if (location.pathname.match("step2")){
-  console.log('ok')
   const pay = () => {
     Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
     const form = document.getElementById("charge-form");
@@ -15,6 +14,7 @@ if (location.pathname.match("step2")){
         exp_year: `20${formData.get("card[exp_year]")}`,
         cvc: formData.get("card[cvc]"),
       };
+
       
       Payjp.createToken(card, (status, response) => {
         if (status == 200){

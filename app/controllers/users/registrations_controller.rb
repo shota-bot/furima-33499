@@ -40,7 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     session["devise.regist_data"]["user"].clear
     session["address_data"]["address"].clear
-
+    
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     customer = Payjp::Customer.create(
       description: 'test',
@@ -52,12 +52,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       customer_token: customer.id,
       user_id: @user.id
     )
-
+    
     unless card.save
       render :new_card and return
     end
 
     sign_in(:user, @user)
+    redirect_to root_path
   end
 
   private
